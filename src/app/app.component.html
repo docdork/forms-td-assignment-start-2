@@ -1,5 +1,6 @@
 <div class="container">
   <div class="row">
+    <h1>My Form</h1>
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <!-- Add a Form with the following Inputs (and Validators)
            1) Mail address (should not be empty and should be an email address)
@@ -17,16 +18,63 @@
            Optionally, display it in your template.
       -->
 
-      <form>
-        <label for="email">Email</label>
-        <input id="email" type="text" class="form-control" />
-        <label for="subcriptions">Subscriptions</label>
-        <select name="subscriptions" id="subscriptions">
-          <option value="basic">Basic</option>
-          <option value="advanced">Advanced</option>
-          <option value="pro">Pro</option>
-        </select>
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="Enter Email"
+            ngModel
+            name="email"
+            required
+            email
+            #email="ngModel"
+          />
+          <p *ngIf="!email.valid && email.touched">Enter Valid Email!!!</p>
+        </div>
+        <div class="form-group">
+          <label for="subcriptions">Subscriptions</label>
+          <select
+            name="subscriptions"
+            class="form-control"
+            id="subscriptions"
+            required
+            [ngModel]="defaultSub"
+            name="sub"
+          >
+            <option value="Basic">Basic</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Pro">Pro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            ngModel
+            placeholder="Password"
+            required
+            #password="ngModel"
+            name="password"
+          />
+          <p *ngIf="!password.valid && password.touched">
+            Enter Valid Password!!!
+          </p>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">
+          Submit
+        </button>
       </form>
+      <hr />
+      <h3 *ngIf="submitted">Sub Data</h3>
+      <p *ngIf="submitted">Email: {{ userData.email }}</p>
+      <p *ngIf="submitted">Subscription: {{ userData.sub }}</p>
+      <p *ngIf="submitted">Password: {{ userData.password }}</p>
     </div>
   </div>
 </div>

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Subscription {\n  constructor(email, subType, password) {\n    this.email = email;\n    this.subType = subType;\n    this.password = password;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
